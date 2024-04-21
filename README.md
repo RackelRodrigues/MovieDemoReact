@@ -23,13 +23,11 @@ Para começar com o Cineflix, siga estes passos:
 
 1. Clone o repositório: `git clone https://github.com/RackelRodrigues/MovieDemoReact.git`
 2. Instale as dependências: `npm install`
-3. Inicie o servidor de desenvolvimento: `npm run dev`
+3. Inicie o servidor de desenvolvimento: `npm start`
 
-## Utilização
+## Visualizando o Site
 
-- Navegue por diferentes páginas usando a barra lateral
-- Classifique filmes e séries clicando no ícone de estrela
-- Busque por filmes e séries usando a barra de pesquisa
+Você pode acessar o Cineflix rodando [aqui](https://cineflix-self.vercel.app/).
 
 ## Agradecimentos
 
