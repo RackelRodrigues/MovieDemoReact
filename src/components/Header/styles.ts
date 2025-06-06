@@ -1,86 +1,100 @@
 import styled from "styled-components";
-import { PiPopcornFill } from "react-icons/pi";
-import { IoHome } from "react-icons/io5";
-import { BiCameraMovie } from "react-icons/bi";
-import { MdCameraRoll } from "react-icons/md";
-import { IoSearch } from "react-icons/io5";
+import { RxDiscordLogo } from "react-icons/rx";
+import { FaInstagram } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
 
-export const Wrapper = styled.div`
-  background-color: #1c1d20;
+export const Wrapper = styled.header`
+  background-color: var(--color-accent);
   width: 100%;
-  height: 70px;
+  max-width: 90rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.6rem;
   display: flex;
   align-items: center;
+  margin: 0 auto;
   justify-content: space-between;
-`;
+  .ContainerHeader {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    background: transparent;
+  }
+  @media (max-width: 700px) {
+    width: 100%;
+    justify-content: space-between;
+  }
 
-export const StyledPipop = styled(PiPopcornFill)`
-  color: #198de0;
-  font-size: 50px;
+  @media (max-width: 480px) {
+    width: 100%;
+  }
 
-  @media (max-width: 776px) {
-    font-size: 40px;
-    color: #198de0;
+  @media (max-width: 350px) {
+    width: 100%;
+  }
+  .itensMenu {
+    width: 100%;
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    justify-content: center;
+    gap: 3.16rem;
+    background-color: var(--color-accent);
+    @media (max-width: 776px) {
+      display: none;
+    }
   }
 `;
 
-export const HomeIcon = styled(IoHome)`
-  color: #e8e6e5;
+export const ContainerIcon = styled.button`
+  color: var(--color-white);
   font-size: 30px;
-  margin-right: 10px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: transparent;
 `;
 
-export const SearchIcon = styled(IoSearch)`
-  color: #e8e6e5;
-  font-size: 30px;
-`;
-
-export const MovieIcon = styled(BiCameraMovie)`
-  color: #e8e6e5;
-  font-size: 30px;
-  margin-left: 10px;
-`;
-
-export const CameraIcon = styled(MdCameraRoll)`
-  color: #e8e6e5;
-  font-size: 30px;
-  margin-left: 10px;
-`;
-
-export const TituloLogo = styled.h2`
-  font-family: Raleway;
-  font-size: 30px;
-  font-weight: 300;
-  color: #198de0;
-  margin-left: 2px;
-
-  @media (max-width: 776px) {
-    display: none;
-  }
+export const TitleLogo = styled.h3`
+  font-size: 1.5rem;
+  font-family: "Ribeye Marrow", serif;
+  font-weight: 400;
+  align-self: center;
+  color: var(--color-primary);
+  background-color: transparent;
+  margin: 0;
 
   @media (max-width: 700px) {
-    font-family: Raleway;
-    font-size: 25px;
-    font-weight: 300;
-    color: #198de0;
-    margin-left: 2px;
   }
 `;
 
 export const ContainerLogo = styled.div`
   display: flex;
   align-items: center;
+  text-align: center;
+  justify-content: center;
   flex-direction: row;
-  margin-left: 40px;
+  height: 100%;
+  cursor: pointer;
+  background-color: transparent;
+`;
+export const ContainerMenu = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  background-color: var(--color-accent);
 `;
 
-export const H2 = styled.h2`
-  font-family: Raleway;
-  font-size: 20px;
-  font-weight: 200;
-  color: #e8e6e5;
+export const Nav = styled.a`
+  font-family: var(--font-manrope);
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--color-primary);
+  text-decoration: none;
   cursor: pointer;
-  padding-left: 40px;
+  background-color: transparent;
+
   @media (max-width: 780px) {
     display: none;
   }
@@ -91,18 +105,10 @@ export const ContainerButton = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  margin-right: 40px;
+  gap: 2rem;
   @media (max-width: 776px) {
     display: none;
   }
-`;
-
-export const ContainerButton2 = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  margin-right: 40px;
 `;
 
 export const BoxGener = styled.div`
@@ -133,4 +139,22 @@ export const Genero = styled.a`
   @media (max-width: 780px) {
     font-size: 15px;
   }
+`;
+export const DiscordLogo = styled(RxDiscordLogo)`
+  cursor: pointer;
+  background-color: transparent;
+  color: var(--color-white);
+  width: 1.8rem;
+`;
+export const InstagramLogo = styled(FaInstagram)`
+  cursor: pointer;
+  background-color: transparent;
+  color: var(--color-white);
+  width: 1.8rem;
+`;
+export const LinkedinLogo = styled(FaLinkedin)`
+  cursor: pointer;
+  background-color: transparent;
+  color: var(--color-white);
+  width: 1.8rem;
 `;

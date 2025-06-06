@@ -1,26 +1,30 @@
 import React from "react";
-import App from "./App.js";
-// import {Series} from "./pages/Series/index";
-import Search from "./pages/search/index.js";
+import App from "./App.tsx";
 import { createRoot } from "react-dom/client";
-import store from "./redux/store.js";
+import { store } from "./redux/store";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import ErrorPage from "./pages/Erropage/errorpage.js";
+import ErrorPage from "./pages/Erropage/index.tsx";
 import { Provider } from "react-redux";
 import "./index.css";
+import "./global.css";
+import Series from "./pages/Series/index.tsx";
+import Releases from "./pages/Releases/index.tsx";
+import Anime from "./pages/animes/index.tsx";
+import Details from "./pages/Details/index.tsx";
+import Movies from "./pages/Movies/index.tsx";
 
-createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
     <React.StrictMode>
       <Router>
         <Routes>
           <Route path="/" element={<App />} />
-          {/* <Route path="/search" element={<Search />} /> */}
-          {/* <Route path="/series" element={<Series />} /> */}
-          {/* <Route
-            path="*"
-            element={<ErrorPage error={{ message: "Página não encontrada" }} />}
-          /> */}
+          <Route path="/Releases" element={<Releases />} />
+          <Route path="/Series" element={<Series />} />
+          <Route path="/Animes" element={<Anime />} />
+          <Route path="/Details" element={<Details />} />
+          <Route path="/Movies" element={<Movies />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Router>
     </React.StrictMode>

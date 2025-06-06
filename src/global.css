@@ -1,0 +1,13 @@
+:root {
+  /* Cores */
+  --color-background: #1c1d20;
+  --color-accent: #198de0;
+  --color-white: #ffffff;
+  --color-primary: #e8e6e5;
+
+  /* Fontes */
+  --font-bebas: "Bebas Neue", sans-serif;
+  --font-manrope: "Manrope", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+  --font-inter: "Inter", sans-serif;
+}

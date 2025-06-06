@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "jsx": "react-jsx",
@@ -13,5 +14,6 @@
     "isolatedModules": true,
     "noEmit": true
   },
+
   "include": ["src"]
 }
