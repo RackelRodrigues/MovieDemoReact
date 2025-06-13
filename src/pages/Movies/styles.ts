@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 export const Background = styled.div`
   background-color: #1c1d20;
-  /* height: 100%; */
+
   width: 100%;
-  /* padding: 2rem; */
+
   box-sizing: border-box;
   @media (min-width: 834px) and (max-width: 1194px) {
     padding: 2rem 0;
