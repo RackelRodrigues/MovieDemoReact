@@ -32,4 +32,3 @@ Você pode acessar o Cineflix rodando [aqui](https://cineflix-self.vercel.app/).
 ## Agradecimentos
 
 Este projeto utiliza a API TMDB para buscar dados de filmes e séries.
-
