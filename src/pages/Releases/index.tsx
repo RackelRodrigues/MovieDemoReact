@@ -1,18 +1,19 @@
 import api from "../../server/api";
 import { Header, TitlePage } from "../../components";
 import Card from "../../components/Card";
-import { useEffect, useState } from "react";
-import { Background } from "./styles";
+import { useEffect, useState, useTransition } from "react";
+import { Background, CardLoading } from "./styles";
 import { useDispatch } from "react-redux";
 import UserActionTypes from "../../redux/id/action-types";
 import { useNavigate } from "react-router-dom";
+import { OrbitProgress } from "react-loading-indicators";
 
 const Releases = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [releases, setReleases] = useState([]);
   const [search, setSearch] = useState("");
-  const [countRealeses, setCountReleases] = useState();
+  const [isPending, startTransition] = useTransition();
 
   const fetchReleases = async () => {
     try {
@@ -25,8 +26,10 @@ const Releases = () => {
         ...moviesRes.data.results,
         ...seriesRes.data.results,
       ];
-      setReleases(merged);
-      console.log(merged);
+
+      startTransition(() => {
+        setReleases(merged);
+      });
     } catch (error) {
       console.error("Erro ao buscar filmes/séries:", error);
     }
@@ -40,17 +43,17 @@ const Releases = () => {
 
     if (type === "Serie") {
       dispatch({
-        type: UserActionTypes.ATUALIZAR_IdSeries,
+        type: UserActionTypes.UPDATE_SERIES_ID,
         payload: id,
       });
     } else if (type === "Movie") {
       dispatch({
-        type: UserActionTypes.ATUALIZAR_Id,
+        type: UserActionTypes.UPDATE_MOVIE_ID,
         payload: id,
       });
     } else {
       dispatch({
-        type: UserActionTypes.ATUALIZAR_IdANIME,
+        type: UserActionTypes.UPDATE_ANIME_ID,
         payload: id,
       });
     }
@@ -59,13 +62,31 @@ const Releases = () => {
   };
 
   return (
-    <Background>
+    <>
       <Header />
-      <div className="ContainerTitle">
-        <TitlePage size="regular" text={`Lançamentos`} />
-      </div>
-      <Card data={releases} onClick={(id, type) => handleUpdate(id, type)} />
-    </Background>
+      <Background>
+        {isPending ? (
+          <CardLoading>
+            <OrbitProgress
+              variant="track-disc"
+              color="#198de0"
+              size="medium"
+              textColor=""
+            />
+          </CardLoading>
+        ) : (
+          <>
+            <div className="ContainerTitle">
+              <TitlePage size="regular" text={`Lançamentos`} />
+            </div>
+            <Card
+              data={releases}
+              onClick={(id, type) => handleUpdate(id, type)}
+            />
+          </>
+        )}
+      </Background>
+    </>
   );
 };
 

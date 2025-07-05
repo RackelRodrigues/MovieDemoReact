@@ -1,7 +1,7 @@
 const UserActionTypes = {
-  ATUALIZAR_Id: "IdMovies/AtualizarMovies",
-  ATUALIZAR_IdANIME: "IdAnime/AtualizarIdAnime",
-  ATUALIZAR_IdSeries: "IdSeries/AtualizarIdSeries",
+  UPDATE_MOVIE_ID: "MovieId/UpdateMovie",
+  UPDATE_ANIME_ID: "AnimeId/UpdateAnimeId",
+  UPDATE_SERIES_ID: "SeriesId/UpdateSeriesId",
 };
 
 export default UserActionTypes;

@@ -1,7 +1,7 @@
 import Header from "../../components/Header";
-import { useEffect, useState } from "react";
+import { useTransition, useEffect, useState } from "react";
 import Card from "../../components/Card";
-import { Background } from "./styles";
+import { Background, CardLoading } from "./styles";
 import api from "../../server/api";
 import countries from "world-countries";
 import { Select, Input } from "../../components";
@@ -9,6 +9,7 @@ import { TitlePage } from "../../components";
 import { useDispatch } from "react-redux";
 import UserActionTypes from "../../redux/id/action-types";
 import { useNavigate } from "react-router-dom";
+import { OrbitProgress } from "react-loading-indicators";
 
 type Genre = {
   id: number;
@@ -24,6 +25,8 @@ const Series = () => {
   const [genres, setGenres] = useState<Genre[]>([]);
   const [selectedGenre, setSelectedGenre] = useState("");
   const [countSeries, setCountSeries] = useState();
+  const [isPending, startTransition] = useTransition();
+
   const countryOptions = countries.map((country) => ({
     label: `${country.name.common}`,
     value: country.cca2,
@@ -31,8 +34,10 @@ const Series = () => {
   const fetchSeries = async () => {
     try {
       const response = await api.get(`/discover/tv`);
+      startTransition(() => {
+        setSeries(response.data.results);
+      });
 
-      setSeries(response.data.results);
       const count = response.data.results.length;
       setCountSeries(count);
     } catch (error) {
@@ -47,7 +52,7 @@ const Series = () => {
 
   const handleUpdate = async (id: any) => {
     dispatch({
-      type: UserActionTypes.ATUALIZAR_IdSeries,
+      type: UserActionTypes.UPDATE_SERIES_ID,
       payload: id,
     });
     navigate("/Details");
@@ -56,8 +61,9 @@ const Series = () => {
   const fetchGenders = async () => {
     try {
       const response = await api.get(`/genre/tv/list?`);
-
-      setGenres(response.data.genres);
+      startTransition(() => {
+        setGenres(response.data.genres);
+      });
     } catch (error) {
       console.error("Erro ao buscar series:", error);
     }
@@ -65,7 +71,6 @@ const Series = () => {
 
   const handleGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const genre = e.target.value;
-    console.log(genre);
     setSelectedGenre(genre);
     fetchMoviesByGenre(genre);
   };
@@ -73,7 +78,10 @@ const Series = () => {
   const fetchMoviesByGenre = async (genreId: string) => {
     try {
       const response = await api.get(`/discover/tv?with_genres=${genreId}`);
-      setSeries(response.data.results);
+      startTransition(() => {
+        setSeries(response.data.results);
+      });
+
       const count = response.data.results.length;
       setCountSeries(count);
     } catch (error) {
@@ -83,7 +91,6 @@ const Series = () => {
 
   const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const genre = e.target.value;
-    console.log(genre);
     setSelectedCountry(genre);
     fetchMoviesByCountries(genre);
   };
@@ -93,7 +100,10 @@ const Series = () => {
       const response = await api.get(
         `/discover/tv?with_origin_country=${countryCode}`
       );
-      setSeries(response.data.results);
+      startTransition(() => {
+        setSeries(response.data.results);
+      });
+
       const count = response.data.results.length;
       setCountSeries(count);
     } catch (error) {
@@ -113,7 +123,9 @@ const Series = () => {
   const fetchSeriesByname = async (SerieName: string) => {
     try {
       const response = await api.get(`/search/tv?query=${SerieName}`);
-      setSeries(response.data.results);
+      startTransition(() => {
+        setSeries(response.data.results);
+      });
       const count = response.data.results.length;
       setCountSeries(count);
     } catch (error) {
@@ -122,8 +134,8 @@ const Series = () => {
   };
   return (
     <>
+      <Header />
       <Background>
-        <Header />
         <div className="ContainerSearch">
           <Input
             value={search}
@@ -147,10 +159,26 @@ const Series = () => {
             placeholder="País"
           />
         </div>
-        <div className="ContainerTitle">
-          <TitlePage size="regular" text={`Todos os filmes (${countSeries})`} />
-        </div>
-        <Card data={series} onClick={(id) => handleUpdate(id)} />
+        {isPending ? (
+          <CardLoading>
+            <OrbitProgress
+              variant="track-disc"
+              color="#198de0"
+              size="medium"
+              textColor=""
+            />
+          </CardLoading>
+        ) : (
+          <>
+            <div className="ContainerTitle">
+              <TitlePage
+                size="regular"
+                text={`Todos os filmes (${countSeries})`}
+              />
+            </div>
+            <Card data={series} onClick={(id) => handleUpdate(id)} />
+          </>
+        )}
       </Background>
     </>
   );

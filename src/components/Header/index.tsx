@@ -8,14 +8,12 @@ import {
   Wrapper,
   ContainerIcon,
   ContainerMenu,
-  InstagramLogo,
+  GithubLogo,
   LinkedinLogo,
   DiscordLogo,
   TitleLogo,
 } from "./styles";
 import Sidebar from "../Sidebar";
-
-interface Props {}
 
 const Header = () => {
   const navigate = useNavigate();
@@ -57,21 +55,36 @@ const Header = () => {
             </div>
             <ContainerMenu>
               <ContainerIcon>
-                <DiscordLogo />
+                <a
+                  href="https://discord.com/users/975821575326687313"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <DiscordLogo />
+                </a>
               </ContainerIcon>
               <ContainerIcon>
-                <LinkedinLogo />
+                <a
+                  href="https://www.linkedin.com/in/rackel-rodrigues-708b57212/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <LinkedinLogo />
+                </a>
               </ContainerIcon>
               <ContainerIcon>
-                <InstagramLogo />
+                <a
+                  href="https://github.com/RackelRodrigues"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <GithubLogo />
+                </a>
               </ContainerIcon>
             </ContainerMenu>
           </div>
         ) : (
-          //aqui fica o sidebar
-          // <ContainerButton2>
           <Sidebar TitlePage={Menuitens} isMobile={isLargeScreen} />
-          // {/* </ContainerButton2> */}
         )}
       </Wrapper>
     </>

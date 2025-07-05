@@ -12,7 +12,6 @@ import {
   Title,
   Year,
   ArrowLeft,
-  ContainerStar,
   ContainerItens,
   ImgPath,
   TagAn,
@@ -50,14 +49,12 @@ const Details = () => {
     }
   }, [currentId, type]);
 
-  console.log(currentId);
   const fetchMovie = async () => {
     if (type !== "Movie") return;
     try {
       const response = await api.get(`/movie/${currentId}`);
 
       setMovieDetails(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error("Erro ao buscar filmes:", error);
     }
@@ -65,7 +62,6 @@ const Details = () => {
   const fetchcrew = async () => {
     if (type !== "Movie") return;
 
-    // console.log(currentId);
     try {
       const response = await api.get(`/movie/${currentId}/credits`);
 
@@ -80,10 +76,6 @@ const Details = () => {
         diretor: Director ? Director.name : "",
         compositor: trilhaSonora ? trilhaSonora.name : "",
       }));
-
-      console.log("crew", response.data);
-      // console.log("Trilha Sonora:", trilhaSonora?.name);
-      // console.log("direcotr:", Director?.name);
     } catch (error) {
       console.error("Erro ao buscar filmes:", error);
     }
@@ -104,10 +96,6 @@ const Details = () => {
         diretor: Director ? Director.name : "",
         compositor: trilhaSonora ? trilhaSonora.name : "",
       }));
-
-      console.log("crew", response.data);
-      // console.log("Trilha Sonora:", trilhaSonora?.name);
-      // console.log("direcotr:", Director?.name);
     } catch (error) {
       console.error("Erro ao buscar filmes:", error);
     }
@@ -118,16 +106,10 @@ const Details = () => {
     try {
       const response = await api.get(`/tv/${currentId}`);
       setMovieDetails(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error("Erro ao buscar anime:", error);
     }
   };
-
-  // useEffect(() => {
-  //   fetchMovie();
-  //   fetchcrew();
-  // }, []);
 
   if (!movieDetails) {
     return (
@@ -149,17 +131,15 @@ const Details = () => {
         <BackgroundContent UrlImage={movieDetails?.backdrop_path}>
           <ArrowLeft onClick={() => navigate(-1)} />
           <div className="Container">
-            <ContainerStar>
-              <ImgMedia
-                src={`https://image.tmdb.org/t/p/w500/${movieDetails?.poster_path}
+            <ImgMedia
+              src={`https://image.tmdb.org/t/p/w500/${movieDetails?.poster_path}
                 
             `}
-                alt={movieDetails?.title}
-                onError={(e) => {
-                  e.currentTarget.src = "src/assets/images/image.png";
-                }}
-              />
-            </ContainerStar>
+              alt={movieDetails?.title}
+              onError={(e) => {
+                e.currentTarget.src = "src/assets/images/image.png";
+              }}
+            />
             <div className="image">
               <div className="year">
                 <Title>{movieDetails?.title || movieDetails?.name}</Title>
@@ -236,7 +216,7 @@ const Details = () => {
               ?.filter((person: any) => person.profile_path)
               .slice(0, 15)
               .map((person: any) => (
-                <div key={person.id}>
+                <div className="actorContainer" key={person.id}>
                   <ImgActor
                     src={`https://image.tmdb.org/t/p/w185${person.profile_path}`}
                     alt={person.name}
@@ -252,12 +232,13 @@ const Details = () => {
             movieDetails.seasons.length > 0 &&
             movieDetails.seasons.map((season) => (
               <div key={season.id}>
-                {season.poster_path && (
-                  <ImgPath
-                    src={`https://image.tmdb.org/t/p/w154${season.poster_path}`}
-                    alt={season.name}
-                  />
-                )}
+                <ImgPath
+                  src={`https://image.tmdb.org/t/p/w154${season.poster_path}`}
+                  alt={season.name}
+                  onError={(e) => {
+                    e.currentTarget.src = "src/assets/images/image.png";
+                  }}
+                />
 
                 <TagAn>{season.name}</TagAn>
                 <TagAn>

@@ -6,21 +6,13 @@ export const Background = styled.div`
   width: 100%;
 
   box-sizing: border-box;
-  @media (min-width: 834px) and (max-width: 1194px) {
-    padding: 2rem 0;
-  }
-  @media (max-width: 480px) {
-    padding: 0;
-  }
-  @media (max-width: 350px) {
-    gap: 0.2rem;
-    padding: 0.4rem 0.1rem;
-  }
+  padding: 0 1rem;
+
   .ContainerSearch {
     display: flex;
     width: 100%;
     margin: 0 auto;
-    max-width: 90rem;
+    max-width: 103rem;
     flex-direction: row;
     gap: 0.5rem;
     padding: 2rem 0;
@@ -43,6 +35,7 @@ export const Background = styled.div`
       width: 100%;
       margin: 0;
       padding: 1rem 0;
+      max-width: 30rem;
     }
   }
 
@@ -56,11 +49,12 @@ export const Background = styled.div`
   }
   .ContainerTitle {
     width: 100%;
-    max-width: 90rem;
+    max-width: 103rem;
     margin: 0 auto;
     padding-bottom: 1rem;
-    @media (max-width: 480px) {
-      /* padding: 0 0 0 0.5rem; */
+
+    @media (max-width: 350px) {
+      max-width: 100%;
     }
   }
 `;

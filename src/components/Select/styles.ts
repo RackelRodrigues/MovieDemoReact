@@ -5,12 +5,13 @@ export const SelectWrapper = styled.div`
   position: relative;
   width: 100%;
   max-width: 20rem;
+  cursor: pointer;
 `;
 
 export const StyledSelect = styled.select`
-  padding: 10px 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  border: 0.2rem solid #ccc;
+  border-radius: 0.5rem;
   font-size: 16px;
   width: 100%;
   background-color: white;
@@ -26,7 +27,6 @@ export const StyledSelect = styled.select`
 
   @media (max-width: 480px) {
     font-size: 0.75rem;
-    /* padding: 0.5rem 0; */
   }
 `;
 
@@ -36,8 +36,7 @@ export const Option = styled.option`
   width: 100%;
   max-width: 20rem;
   font-size: inherit;
-  background-color: blueviolet;
-  /* font-size: 1rem; */
+  background-color: white;
 
   @media (max-width: 1024px) {
     font-size: 0.875rem;

@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import { RxDiscordLogo } from "react-icons/rx";
-import { FaInstagram } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 
 export const Wrapper = styled.header`
   background-color: var(--color-accent);
   width: 100%;
-  max-width: 90rem;
-  padding: 0.5rem 1rem;
-  border-radius: 0.6rem;
+  padding: 1rem 1rem;
+  top: 0;
+  left: 0;
   display: flex;
   align-items: center;
   margin: 0 auto;
@@ -28,10 +28,18 @@ export const Wrapper = styled.header`
 
   @media (max-width: 480px) {
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
   }
 
   @media (max-width: 350px) {
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0.3rem;
   }
   .itensMenu {
     width: 100%;
@@ -84,6 +92,10 @@ export const ContainerMenu = styled.div`
   flex-direction: row;
   gap: 0.5rem;
   background-color: var(--color-accent);
+
+  a {
+    text-decoration: none;
+  }
 `;
 
 export const Nav = styled.a`
@@ -146,7 +158,7 @@ export const DiscordLogo = styled(RxDiscordLogo)`
   color: var(--color-white);
   width: 1.8rem;
 `;
-export const InstagramLogo = styled(FaInstagram)`
+export const GithubLogo = styled(FaGithub)`
   cursor: pointer;
   background-color: transparent;
   color: var(--color-white);

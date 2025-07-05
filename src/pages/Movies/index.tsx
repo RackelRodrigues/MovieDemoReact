@@ -1,7 +1,7 @@
 import { Card, Header } from "../../components";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import api from "../../server/api";
 import UserActionTypes from "../../redux/id/action-types";
 import { Background, CardLoading } from "./styles";
@@ -22,7 +22,8 @@ const Movies = () => {
   const [search, setSearch] = useState("");
   const [genres, setGenres] = useState<Genre[]>([]);
   const [selectedGenre, setSelectedGenre] = useState("");
-  const [countMovies, setCountMovies] = useState();
+  const [countMovies, setCountMovies] = useState(0);
+  const [isPending, startTransition] = useTransition();
   const countryOptions = countries.map((country) => ({
     label: `${country.name.common}`,
     value: country.cca2,
@@ -31,10 +32,12 @@ const Movies = () => {
   const fetchMovies = async () => {
     try {
       const response = await api.get(`/discover/movie`);
-      setMovies(response.data.results);
+      startTransition(() => {
+        setMovies(response.data.results);
+      });
+
       const count = response.data.results.length;
       setCountMovies(count);
-      // console.log("response fetch", count);
     } catch (error) {
       console.error("Erro ao buscar filmes:", error);
     }
@@ -49,7 +52,6 @@ const Movies = () => {
     try {
       const response = await api.get(`/genre/movie/list?`);
 
-      // console.log("data", response.data);
       setGenres(response.data.genres);
     } catch (error) {
       console.error("Erro ao buscar filmes:", error);
@@ -58,7 +60,7 @@ const Movies = () => {
 
   const handleUpdate = async (id: any, type: any) => {
     dispatch({
-      type: UserActionTypes.ATUALIZAR_Id,
+      type: UserActionTypes.UPDATE_MOVIE_ID,
       payload: id,
     });
     navigate("/Details");
@@ -66,7 +68,6 @@ const Movies = () => {
 
   const handleGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const genre = e.target.value;
-    // console.log(genre);
     setSelectedGenre(genre);
     fetchMoviesByGenre(genre);
   };
@@ -74,7 +75,10 @@ const Movies = () => {
   const fetchMoviesByGenre = async (genreId: string) => {
     try {
       const response = await api.get(`/discover/movie?with_genres=${genreId}`);
-      setMovies(response.data.results);
+      startTransition(() => {
+        setMovies(response.data.results);
+      });
+
       const count = response.data.results.length;
       setCountMovies(count);
     } catch (error) {
@@ -84,7 +88,6 @@ const Movies = () => {
 
   const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const genre = e.target.value;
-    // console.log(genre);
     setSelectedCountry(genre);
     fetchMoviesByCountries(genre);
   };
@@ -94,7 +97,9 @@ const Movies = () => {
       const response = await api.get(
         `/discover/movie?with_origin_country=${countryCode}`
       );
-      setMovies(response.data.results);
+      startTransition(() => {
+        setMovies(response.data.results);
+      });
       const count = response.data.results.length;
       setCountMovies(count);
     } catch (error) {
@@ -102,23 +107,20 @@ const Movies = () => {
     }
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("passou por aqui handlechange");
     setSearch(e.target.value);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    console.log("passou por aqui handleKeyDown");
     if (e.key === "Enter") {
-      console.log("passou por aqui handleKeyDown entrou no if");
       fetchMoviesByname(search);
     }
   };
   const fetchMoviesByname = async (MovieName: string) => {
-    console.log("name", MovieName);
     try {
       const response = await api.get(`/search/movie?query=${MovieName}`);
-      setMovies(response.data.results);
-      console.log(response.data.results);
+      startTransition(() => {
+        setMovies(response.data.results);
+      });
       const count = response.data.results.length;
       setCountMovies(count);
     } catch (error) {
@@ -128,8 +130,8 @@ const Movies = () => {
 
   return (
     <>
+      <Header />
       <Background>
-        <Header />
         <div className="ContainerSearch">
           <Input
             value={search}
@@ -156,18 +158,22 @@ const Movies = () => {
         <div className="ContainerTitle">
           <TitlePage size="regular" text={`Todos os filmes (${countMovies})`} />
         </div>
-        {!movies ? (
+        {isPending ? (
           <CardLoading>
             <OrbitProgress
               variant="track-disc"
               color="#198de0"
               size="medium"
-              text="loading"
               textColor=""
             />
           </CardLoading>
         ) : (
-          <Card data={movies} onClick={(id, type) => handleUpdate(id, type)} />
+          <>
+            <Card
+              data={movies}
+              onClick={(id, type) => handleUpdate(id, type)}
+            />
+          </>
         )}
       </Background>
     </>

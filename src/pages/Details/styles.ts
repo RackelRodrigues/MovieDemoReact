@@ -62,10 +62,8 @@ export const CardLoading = styled.div`
 export const BackgroundContent = styled.div<Props>`
   position: relative;
   padding: 2rem;
-  /* margin-top: 2rem; */
   width: 100%;
   height: 40rem;
-  /* padding-top: 1rem; */
   mask-image: linear-gradient(
     to bottom,
     black 50%,
@@ -109,7 +107,11 @@ export const BackgroundContent = styled.div<Props>`
 
   .year {
     display: flex;
-    align-items: center;
+    width: 100%;
+    display: inline-flex;
+    align-items: baseline;
+
+    flex-wrap: wrap;
   }
 
   div {
@@ -134,12 +136,13 @@ export const ImgMedia = styled.img`
   }
 
   @media (max-width: 480px) {
-    max-width: 25rem;
-    max-height: 30rem;
+    max-width: 10rem;
+    max-height: 15rem;
   }
 
   @media (max-width: 350px) {
-    width: 7rem;
+    max-width: 7rem;
+    max-height: 10rem;
   }
 `;
 
@@ -153,6 +156,10 @@ export const Tag = styled.h3`
   span {
     font-weight: bold;
     background: transparent;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
   }
 
   @media (max-width: 350px) {
@@ -171,6 +178,10 @@ export const TagAn = styled.h3`
     background: transparent;
   }
 
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
+
   @media (max-width: 350px) {
     font-size: 0.8rem;
   }
@@ -182,21 +193,11 @@ export const Star = styled.div`
   font-size: 1.25rem;
   color: var(--color-white);
 
-  /* padding: 4px 8px; */
-  /* border-radius: 8px; */
-
   display: flex;
   align-items: center;
-  /* justify-content: flex-end;
-  margin-top: 0.3rem; */
 `;
 
 export const ContainerInfo = styled.div``;
-export const ContainerStar = styled.div`
-  display: inline-block;
-  background: transparent;
-  max-width: 20rem;
-`;
 
 export const Title = styled.h2`
   color: #000;
@@ -205,10 +206,7 @@ export const Title = styled.h2`
   font-weight: 400;
   font-style: normal;
   font-size: 3.8rem;
-
   text-transform: uppercase;
-  .Year {
-  }
 
   @media (min-width: 834px) and (max-width: 1194px) {
     font-size: 3rem;
@@ -217,7 +215,7 @@ export const Title = styled.h2`
     font-size: 2.5rem;
   }
   @media (max-width: 480px) {
-    font-size: 2rem;
+    font-size: 1.2rem;
   }
 `;
 export const Year = styled.h4`
@@ -226,7 +224,10 @@ export const Year = styled.h4`
   color: #000;
   background-color: transparent;
   margin-left: 0.4rem;
-  .Year {
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    margin-left: 0;
   }
 `;
 export const TagGender = styled.p`
@@ -247,9 +248,11 @@ export const Description = styled.p`
   max-width: 51rem;
   font-size: 1rem;
 
-  @media (max-width: 350px) {
+  @media screen and (max-width: 450px) and (min-width: 310px) {
     font-size: 0.8rem;
-    max-width: 20rem;
+    max-width: 100%;
+    font-size: 0.6rem;
+    font-weight: 500;
   }
 `;
 
@@ -258,7 +261,7 @@ export const ContainerActors = styled.div`
   max-width: 70rem;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 6rem;
 
   @media (max-width: 1024px) {
@@ -278,13 +281,22 @@ export const ContainerActors = styled.div`
 
   @media (max-width: 480px) {
     grid-template-columns: repeat(2, 1fr);
-    padding: 0 1rem;
+    padding: 1rem 1rem;
     gap: 1rem;
+    height: 100%;
   }
   @media (max-width: 350px) {
     grid-template-columns: repeat(2, 1fr);
     padding: 0 1rem;
     gap: 1.5rem;
+    width: 100%;
+  }
+  .actorContainer {
+    height: 100%;
+
+    @media screen and (max-width: 480px) {
+      padding: 0.5rem 0;
+    }
   }
 `;
 
@@ -293,7 +305,7 @@ export const ImgActor = styled.img`
   height: 100%;
   max-height: 12rem;
   max-width: 10rem;
-  border-radius: 0.7rem;
+  border-radius: 0.5rem;
 
   @media (min-width: 834px) and (max-width: 1194px) {
     max-width: 15rem;
@@ -307,11 +319,15 @@ export const ImgActor = styled.img`
 
   @media (max-width: 480px) {
     grid-template-columns: repeat(3, 1fr);
+    max-width: 20rem;
+    max-height: 20rem;
+    border-radius: 0.3rem;
   }
 
   @media (max-width: 350px) {
-    max-width: 20rem;
-    max-height: 20rem;
+    max-width: 24rem;
+    max-height: 24rem;
+    border-radius: 0.2rem;
   }
 `;
 export const NameActor = styled.h5`
@@ -322,6 +338,12 @@ export const NameActor = styled.h5`
   color: var(--color-white);
   max-width: 10rem;
   margin-top: 0.5rem;
+  text-align: center;
+  @media (max-width: 480px) {
+    margin-top: 0.2rem;
+    max-width: 20rem;
+    font-size: 0.8rem;
+  }
   @media (max-width: 350px) {
     margin-top: 0.2rem;
     max-width: 20rem;
@@ -347,4 +369,21 @@ export const ContainerItens = styled.div`
 export const ImgPath = styled.img`
   cursor: pointer;
   border-radius: 0.3rem;
+  width: 100%;
+  height: 100%;
+  max-width: 18rem;
+  max-height: 15rem;
+  @media (min-width: 609px) and (max-width: 1024px) {
+    max-width: 15rem;
+    max-height: 12rem;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 10rem;
+    max-height: 15rem;
+  }
+  @media (max-width: 350px) {
+    max-width: 11rem;
+    max-height: 15rem;
+  }
 `;

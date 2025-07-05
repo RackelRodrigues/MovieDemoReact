@@ -1,7 +1,7 @@
 import Header from "./components/Header";
-import { useEffect, useState } from "react";
+import { useTransition, useEffect, useState } from "react";
 import Card from "./components/Card";
-import { Background } from "./app";
+import { Background, CardLoading } from "./app";
 import { MediaDTO } from "./DTO/MediaDTO/MediaDTO";
 import api from "./server/api";
 import { useDispatch } from "react-redux";
@@ -9,20 +9,22 @@ import UserActionTypes from "./redux/id/action-types";
 import { useNavigate } from "react-router-dom";
 import { TitlePage } from "./components";
 import Banner from "./components/Banner";
+import { OrbitProgress } from "react-loading-indicators";
 
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [moviesRated, setMoviesRated] = useState<MediaDTO[]>();
   const [featuredMedia, setFeaturedMedia] = useState<MediaDTO[]>([]);
+  const [isPending, startTransition] = useTransition();
 
   const fetchMoviesrated = async () => {
     try {
-      const response = await api.get(`/movie/top_rated`);
-      // console.log({ response });
-      const top6 = response.data.results.slice(0, 1);
-      console.log(top6);
-      setMoviesRated(top6);
+      const response = await api.get(`/movie/now_playing?language=pt-BR`);
+      const top4 = response.data.results.slice(0, 4);
+      startTransition(() => {
+        setMoviesRated(top4);
+      });
     } catch (error) {
       console.error("Erro ao buscar filmes:", error);
     }
@@ -30,8 +32,6 @@ function App() {
   const fetchMoviesDetails = async () => {
     try {
       const response = await api.get(`/movie/278`);
-      // console.log("detalhes do filme", response);
-      // setSidebarActive(response.data.results);
     } catch (error) {
       console.error("Erro ao buscar filmes:", error);
     }
@@ -41,8 +41,9 @@ function App() {
     try {
       const response = await api.get(`/discover/movie`);
 
-      // console.log("data", response.data);
-      setFeaturedMedia(response.data.results);
+      startTransition(() => {
+        setFeaturedMedia(response.data.results);
+      });
     } catch (error) {
       console.error("Erro ao buscar filmes:", error);
     }
@@ -51,7 +52,7 @@ function App() {
   const handleUpdate = async (id: any) => {
     console.log(id);
     dispatch({
-      type: UserActionTypes.ATUALIZAR_Id,
+      type: UserActionTypes.UPDATE_MOVIE_ID,
       payload: id,
     });
     navigate("/Details");
@@ -65,16 +66,29 @@ function App() {
 
   return (
     <>
+      <Header />
       <Background>
-        <Header />
-        <div className="ContainerTitle">
-          <TitlePage size="regular" text="Recomendados" />
-        </div>
-        <Banner data={moviesRated} />
-        <div className="ContainerTitle2">
-          <TitlePage size="regular" text="Destaques Da Semana " />
-        </div>
-        <Card data={featuredMedia} onClick={(id) => handleUpdate(id)} />
+        {isPending ? (
+          <CardLoading>
+            <OrbitProgress
+              variant="track-disc"
+              color="#198de0"
+              size="medium"
+              textColor=""
+            />
+          </CardLoading>
+        ) : (
+          <>
+            <div className="ContainerTitle">
+              <TitlePage size="regular" text="Recomendados" />
+            </div>
+            <Banner data={moviesRated} />
+            <div className="ContainerTitle">
+              <TitlePage size="regular" text="Destaques Da Semana " />
+            </div>
+            <Card data={featuredMedia} onClick={(id) => handleUpdate(id)} />
+          </>
+        )}
       </Background>
     </>
   );

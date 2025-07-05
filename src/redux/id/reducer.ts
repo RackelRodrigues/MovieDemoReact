@@ -7,19 +7,19 @@ const initialState = {
 
 const IdReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case UserActionTypes.ATUALIZAR_Id:
+    case UserActionTypes.UPDATE_MOVIE_ID:
       return {
         ...state,
         currentId: action.payload,
         type: "Movie",
       };
-    case UserActionTypes.ATUALIZAR_IdANIME:
+    case UserActionTypes.UPDATE_ANIME_ID:
       return {
         ...state,
         currentId: action.payload,
         type: "Anime",
       };
-    case UserActionTypes.ATUALIZAR_IdSeries:
+    case UserActionTypes.UPDATE_SERIES_ID:
       return {
         ...state,
         currentId: action.payload,

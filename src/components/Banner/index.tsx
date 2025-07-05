@@ -4,14 +4,10 @@ import { MediaDTO } from "../../DTO/MediaDTO/MediaDTO";
 import {
   Container,
   ImgBanner,
-  Nav,
-  Button,
   Title,
   Year,
   DescriptionBanner,
-  PlaySvg,
   MotionWrapper,
-  Dot,
 } from "./styles";
 
 interface BannerProps {
@@ -46,10 +42,6 @@ const Banner = ({ data }: BannerProps) => {
               <Year>({data[current]?.release_date?.slice(0, 4)})</Year>
             </div>
             <DescriptionBanner>{data[current]?.overview}</DescriptionBanner>
-            <Button>
-              <PlaySvg />
-              Assistir agora
-            </Button>
           </Container>
         </ImgBanner>
       </MotionWrapper>

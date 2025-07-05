@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import {
   ButtonMenu,
   SidebarContainer,
-  ContainerUrl,
+  // ContainerUrl,
   NavLink,
   ContainerButton,
   HamburgerMenu,
   HamburgerMenuopen,
+  PageWrapper,
 } from "./styles";
 
 type Title = {
@@ -22,30 +23,29 @@ interface Props {
 export const Sidebar: React.FC<Props> = ({ TitlePage }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <>
+    <PageWrapper>
       <ContainerButton>
         <ButtonMenu onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <HamburgerMenuopen /> : <HamburgerMenu />}
         </ButtonMenu>
       </ContainerButton>
-      <SidebarContainer isActive={isOpen}>
-        {isOpen && (
-          <div className="ContainerNav">
+      {isOpen && (
+        <SidebarContainer isActive={isOpen}>
+          <nav className="ContainerNav">
             {TitlePage?.map((Title, index) => (
-              <ContainerUrl key={index}>
-                <NavLink
-                  href={
-                    Title.path.startsWith("/") ? Title.path : `/${Title.path}`
-                  }
-                >
-                  {Title.label}
-                </NavLink>
-              </ContainerUrl>
+              <NavLink
+                key={index}
+                href={
+                  Title.path.startsWith("/") ? Title.path : `/${Title.path}`
+                }
+              >
+                {Title.label}
+              </NavLink>
             ))}
-          </div>
-        )}
-      </SidebarContainer>
-    </>
+          </nav>
+        </SidebarContainer>
+      )}
+    </PageWrapper>
   );
 };
 
