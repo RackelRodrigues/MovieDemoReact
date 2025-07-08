@@ -127,6 +127,7 @@ export const ImgMedia = styled.img`
   z-index: 1000;
   border-radius: 0.2rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  object-fit: cover;
   @media (max-width: 1024px) {
     grid-template-columns: repeat(3, 1fr);
   }

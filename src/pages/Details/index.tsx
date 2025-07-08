@@ -137,7 +137,7 @@ const Details = () => {
             `}
               alt={movieDetails?.title}
               onError={(e) => {
-                e.currentTarget.src = "public/images/image.png";
+                e.currentTarget.src = "images/image.png";
               }}
             />
             <div className="image">
@@ -221,7 +221,7 @@ const Details = () => {
                     src={`https://image.tmdb.org/t/p/w185${person.profile_path}`}
                     alt={person.name}
                     onError={(e) => {
-                      e.currentTarget.src = "public/images/image.png";
+                      e.currentTarget.src = "images/image.png";
                     }}
                   />
                   <NameActor>{person.name}</NameActor>
@@ -236,7 +236,7 @@ const Details = () => {
                   src={`https://image.tmdb.org/t/p/w154${season.poster_path}`}
                   alt={season.name}
                   onError={(e) => {
-                    e.currentTarget.src = "public/images/image.png";
+                    e.currentTarget.src = "images/image.png";
                   }}
                 />
 
