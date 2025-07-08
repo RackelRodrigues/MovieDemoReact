@@ -19,7 +19,7 @@ const Card = ({ data, onClick }: Props) => {
             src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
             alt={data.title}
             onError={(e) => {
-              e.currentTarget.src = "public/images/image.png";
+              e.currentTarget.src = "images/image.png";
             }}
           />
 
