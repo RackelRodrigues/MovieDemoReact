@@ -15,20 +15,15 @@ const Card = ({ data, onClick }: Props) => {
             onClick?.(data.id, data.first_air_date ? "Serie" : "Movie")
           }
         >
-          {/* <Div> */}
-          {/* <ImgWrapper> */}
           <ImgMovie
             src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
             alt={data.title}
             onError={(e) => {
-              e.currentTarget.src = "src/assets/images/image.png";
+              e.currentTarget.src = "public/images/image.png";
             }}
           />
-          {/* </ImgWrapper> */}
-          {/* </Div> */}
-          {/* <ContainerStar> */}
+
           <TitleMovie>{data.title || data.name}</TitleMovie>
-          {/* </ContainerStar> */}
         </Containername>
       ))}
     </ContainerMovies>
