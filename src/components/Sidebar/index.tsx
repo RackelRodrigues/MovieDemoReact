@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   ButtonMenu,
   SidebarContainer,
-  // ContainerUrl,
   NavLink,
   ContainerButton,
   HamburgerMenu,
@@ -21,6 +21,7 @@ interface Props {
 }
 
 export const Sidebar: React.FC<Props> = ({ TitlePage }) => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   return (
     <PageWrapper>
@@ -38,6 +39,12 @@ export const Sidebar: React.FC<Props> = ({ TitlePage }) => {
                 href={
                   Title.path.startsWith("/") ? Title.path : `/${Title.path}`
                 }
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate(
+                    Title.path.startsWith("/") ? Title.path : `/${Title.path}`
+                  );
+                }}
               >
                 {Title.label}
               </NavLink>
