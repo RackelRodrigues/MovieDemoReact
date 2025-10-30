@@ -129,7 +129,7 @@ const Details = () => {
     <>
       <Background>
         <BackgroundContent UrlImage={movieDetails?.backdrop_path}>
-          <ArrowLeft onClick={() => navigate(-1)} />
+          <ArrowLeft onClick={() => navigate(-1)} aria-label="back page" />
           <div className="Container">
             <ImgMedia
               src={`https://image.tmdb.org/t/p/w500/${movieDetails?.poster_path}

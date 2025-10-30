@@ -1,12 +1,14 @@
 import { StyledInput } from "./styles";
+import { ComponentProps } from "react";
 
-type InputProps = {
+interface InputProps extends ComponentProps<"input"> {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   placeholder?: string;
   type?: string;
-};
+  props?: ChildNode;
+}
 
 const Input = ({
   value,
@@ -14,6 +16,7 @@ const Input = ({
   placeholder,
   type = "text",
   onKeyDown,
+  ...props
 }: InputProps) => {
   return (
     <StyledInput
@@ -22,6 +25,7 @@ const Input = ({
       onKeyDown={onKeyDown}
       placeholder={placeholder}
       type={type}
+      {...props}
     />
   );
 };

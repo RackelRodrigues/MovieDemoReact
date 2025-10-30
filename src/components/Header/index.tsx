@@ -1,4 +1,3 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Menuitens } from "../../utils/menuList";
@@ -19,9 +18,6 @@ const Header = () => {
   const navigate = useNavigate();
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 776);
 
-  const Navigation = (route: any) => {
-    navigate(route);
-  };
   const handleResize = () => {
     setIsLargeScreen(window.innerWidth > 776);
   };
@@ -48,7 +44,7 @@ const Header = () => {
           <div className="ContainerHeader">
             <div className="itensMenu">
               {Menuitens.map((item, index) => (
-                <Nav key={index} onClick={() => Navigation(item.path)}>
+                <Nav key={index} href={item.path} aria-label={item.label}>
                   {item.label}
                 </Nav>
               ))}
@@ -59,15 +55,17 @@ const Header = () => {
                   href="https://discord.com/users/975821575326687313"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Page Discord"
                 >
                   <DiscordLogo />
                 </a>
               </ContainerIcon>
               <ContainerIcon>
                 <a
-                  href="https://www.linkedin.com/in/rackel-rodrigues-708b57212/"
+                  href="https://www.linkedin.com/in/rackelrodrigues/"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Page Linkedin"
                 >
                   <LinkedinLogo />
                 </a>
@@ -77,6 +75,7 @@ const Header = () => {
                   href="https://github.com/RackelRodrigues"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Page Github"
                 >
                   <GithubLogo />
                 </a>

@@ -19,7 +19,6 @@ const Anime = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [animes, setAnimes] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState("");
   const [search, setSearch] = useState("");
   const [genres, setGenres] = useState<Genre[]>([]);
   const [selectedGenre, setSelectedGenre] = useState("");

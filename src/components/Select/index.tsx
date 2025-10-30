@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ComponentProps, useState } from "react";
 import {
   ArrowDown,
   ArrowIcon,
@@ -12,15 +12,21 @@ type Option = {
   label: string;
   value: string;
 };
-
-type SelectProps = {
+interface SelectProps extends ComponentProps<"select"> {
   value: string;
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   options: Option[];
   placeholder?: string;
-};
+  props?: ChildNode;
+}
 
-const Select = ({ value, onChange, options, placeholder }: SelectProps) => {
+const Select = ({
+  value,
+  onChange,
+  options,
+  placeholder,
+  ...props
+}: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <SelectWrapper>
@@ -31,6 +37,7 @@ const Select = ({ value, onChange, options, placeholder }: SelectProps) => {
           setIsOpen(false);
         }}
         onClick={() => setIsOpen((prev) => !prev)}
+        {...props}
       >
         {placeholder && <option value="">{placeholder}</option>}
         {options.map((option) => (

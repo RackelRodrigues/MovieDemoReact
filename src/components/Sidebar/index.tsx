@@ -26,7 +26,10 @@ export const Sidebar: React.FC<Props> = ({ TitlePage }) => {
   return (
     <PageWrapper>
       <ContainerButton>
-        <ButtonMenu onClick={() => setIsOpen(!isOpen)}>
+        <ButtonMenu
+          aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
+          onClick={() => setIsOpen(!isOpen)}
+        >
           {isOpen ? <HamburgerMenuopen /> : <HamburgerMenu />}
         </ButtonMenu>
       </ContainerButton>
@@ -45,6 +48,7 @@ export const Sidebar: React.FC<Props> = ({ TitlePage }) => {
                     Title.path.startsWith("/") ? Title.path : `/${Title.path}`
                   );
                 }}
+                aria-label={Title.label}
               >
                 {Title.label}
               </NavLink>

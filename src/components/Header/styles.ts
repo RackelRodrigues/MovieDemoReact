@@ -72,9 +72,6 @@ export const TitleLogo = styled.h3`
   color: var(--color-primary);
   background-color: transparent;
   margin: 0;
-
-  @media (max-width: 700px) {
-  }
 `;
 
 export const ContainerLogo = styled.div`
@@ -90,7 +87,7 @@ export const ContainerLogo = styled.div`
 export const ContainerMenu = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 0.5rem;
+  gap: 0.8rem;
   background-color: var(--color-accent);
 
   a {
