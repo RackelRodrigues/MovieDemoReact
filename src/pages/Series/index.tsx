@@ -50,7 +50,7 @@ const Series = () => {
     fetchGenders();
   }, []);
 
-  const handleUpdate = async (id: any) => {
+  const handleUpdate = async (id: number) => {
     dispatch({
       type: UserActionTypes.UPDATE_SERIES_ID,
       payload: id,

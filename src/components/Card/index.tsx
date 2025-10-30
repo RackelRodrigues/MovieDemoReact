@@ -1,13 +1,13 @@
 import { MediaDTO } from "../../DTO/MediaDTO/MediaDTO";
 import { ContainerMovies, Containername, ImgMovie, TitleMovie } from "./styles";
 
-type Props = {
+type CardProps = {
   data: MediaDTO[];
   onClick?: (id: number, type?: string) => void;
 };
-const Card = ({ data, onClick }: Props) => {
+const Card = ({ data, onClick }: CardProps) => {
   return (
-    <ContainerMovies>
+    <ContainerMovies data-testid="card-component">
       {data.map((data: any) => (
         <Containername
           key={data.id}
