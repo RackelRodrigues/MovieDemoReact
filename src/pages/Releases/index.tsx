@@ -38,9 +38,7 @@ const Releases = () => {
     fetchReleases();
   }, []);
 
-  const handleUpdate = async (id: any, type: any) => {
-    console.log(type);
-
+  const handleUpdate = async (id: number, type?: string, title?: string) => {
     if (type === "Serie") {
       dispatch({
         type: UserActionTypes.UPDATE_SERIES_ID,
@@ -58,7 +56,7 @@ const Releases = () => {
       });
     }
 
-    navigate("/Details");
+    navigate(`/details/${title}`);
   };
 
   return (
@@ -72,6 +70,7 @@ const Releases = () => {
               color="#198de0"
               size="medium"
               textColor=""
+              text=""
             />
           </CardLoading>
         ) : (
@@ -81,7 +80,7 @@ const Releases = () => {
             </div>
             <Card
               data={releases}
-              onClick={(id, type) => handleUpdate(id, type)}
+              onClick={(id, type, title) => handleUpdate(id, type, title)}
             />
           </>
         )}

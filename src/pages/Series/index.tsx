@@ -50,12 +50,12 @@ const Series = () => {
     fetchGenders();
   }, []);
 
-  const handleUpdate = async (id: number) => {
+  const handleUpdate = async (id: number, title?: string) => {
     dispatch({
       type: UserActionTypes.UPDATE_SERIES_ID,
       payload: id,
     });
-    navigate("/Details");
+    navigate(`/details/${title}`);
   };
 
   const fetchGenders = async () => {
@@ -98,7 +98,7 @@ const Series = () => {
   const fetchMoviesByCountries = async (countryCode: string) => {
     try {
       const response = await api.get(
-        `/discover/tv?with_origin_country=${countryCode}`
+        `/discover/tv?with_origin_country=${countryCode}`,
       );
       startTransition(() => {
         setSeries(response.data.results);
@@ -176,7 +176,10 @@ const Series = () => {
                 text={`Todos os filmes (${countSeries})`}
               />
             </div>
-            <Card data={series} onClick={(id) => handleUpdate(id)} />
+            <Card
+              data={series}
+              onClick={(id, title) => handleUpdate(id, title)}
+            />
           </>
         )}
       </Background>

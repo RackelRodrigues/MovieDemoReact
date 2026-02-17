@@ -15,6 +15,12 @@ export const Containername = styled.div`
   @media (max-width: 350px) {
     max-width: 10rem;
   }
+  .image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2 / 2.8;
+    overflow: hidden;
+  }
 `;
 
 export const ImgMovie = styled.img`

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface Props {
-  size: "regular" | "medion" | "small";
+  size: "regular" | "medium" | "small";
 }
 
 export const H3 = styled.h3<Props>`
@@ -10,7 +10,7 @@ export const H3 = styled.h3<Props>`
     switch (size) {
       case "small":
         return "1rem";
-      case "medion":
+      case "medium":
         return "1.5rem";
       case "regular":
       default:

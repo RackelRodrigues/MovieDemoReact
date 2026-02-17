@@ -64,7 +64,7 @@ const Anime = () => {
   const fetchAnimesByGenre = async (genreId: string) => {
     try {
       const response = await api.get(
-        `/discover/tv?with_origin_country=JP&with_genres=${genreId}`
+        `/discover/tv?with_origin_country=JP&with_genres=${genreId}`,
       );
       startTransition(() => {
         setAnimes(response.data.results);
@@ -77,12 +77,12 @@ const Anime = () => {
     }
   };
 
-  const handleUpdate = async (id: any) => {
+  const handleUpdate = async (id: number, title?: string) => {
     dispatch({
       type: UserActionTypes.UPDATE_ANIME_ID,
       payload: id,
     });
-    navigate("/Details");
+    navigate(`/details/${title}`);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -97,7 +97,7 @@ const Anime = () => {
   const fetchAnimesByname = async (AnimeName: string) => {
     try {
       const response = await api.get(
-        `/search/tv?query=${AnimeName}&language=pt-BR&with_original_language=ja`
+        `/search/tv?query=${AnimeName}&language=pt-BR&with_original_language=ja`,
       );
       startTransition(() => {
         setAnimes(response.data.results);
@@ -146,7 +146,10 @@ const Anime = () => {
           </CardLoading>
         ) : (
           <>
-            <Card data={animes} onClick={(id) => handleUpdate(id)} />
+            <Card
+              data={animes}
+              onClick={(id, title) => handleUpdate(id, title)}
+            />
           </>
         )}
       </Background>

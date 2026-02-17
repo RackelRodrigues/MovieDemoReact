@@ -58,12 +58,12 @@ const Movies = () => {
     }
   };
 
-  const handleUpdate = async (id: any, type: any) => {
+  const handleUpdate = async (id: number, type?: string, title?: string) => {
     dispatch({
       type: UserActionTypes.UPDATE_MOVIE_ID,
       payload: id,
     });
-    navigate("/Details");
+    navigate(`/details/${title}`);
   };
 
   const handleGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -95,7 +95,7 @@ const Movies = () => {
   const fetchMoviesByCountries = async (countryCode: string) => {
     try {
       const response = await api.get(
-        `/discover/movie?with_origin_country=${countryCode}`
+        `/discover/movie?with_origin_country=${countryCode}`,
       );
       startTransition(() => {
         setMovies(response.data.results);
@@ -171,7 +171,7 @@ const Movies = () => {
           <>
             <Card
               data={movies}
-              onClick={(id, type) => handleUpdate(id, type)}
+              onClick={(id, type, title) => handleUpdate(id, type, title)}
             />
           </>
         )}

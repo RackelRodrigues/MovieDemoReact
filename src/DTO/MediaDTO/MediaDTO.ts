@@ -15,4 +15,5 @@ export interface MediaDTO {
   country?: string;
   language?: string;
   poster_path?: string;
+  first_air_date?: string;
 }

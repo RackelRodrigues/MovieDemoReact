@@ -49,13 +49,12 @@ function App() {
     }
   };
 
-  const handleUpdate = async (id: any) => {
-    console.log(id);
+  const handleUpdate = async (id: number, type?: string, title?: string) => {
     dispatch({
       type: UserActionTypes.UPDATE_MOVIE_ID,
       payload: id,
     });
-    navigate("/Details");
+    navigate(`/details/${title}`);
   };
 
   useEffect(() => {
@@ -86,7 +85,10 @@ function App() {
             <div className="ContainerTitle">
               <TitlePage size="regular" text="Destaques Da Semana " />
             </div>
-            <Card data={featuredMedia} onClick={(id) => handleUpdate(id)} />
+            <Card
+              data={featuredMedia}
+              onClick={(id, type, title) => handleUpdate(id, type, title)}
+            />
           </>
         )}
       </Background>

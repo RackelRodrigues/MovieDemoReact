@@ -3,7 +3,7 @@ import React from "react";
 
 interface TitleProps {
   text?: string;
-  size: "regular" | "medion" | "small";
+  size: "regular" | "medium" | "small";
   children?: React.ReactNode;
 }
 

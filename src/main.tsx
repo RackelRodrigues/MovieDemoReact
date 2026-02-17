@@ -22,11 +22,11 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/Releases" element={<Releases />} />
           <Route path="/Series" element={<Series />} />
           <Route path="/Animes" element={<Anime />} />
-          <Route path="/Details" element={<Details />} />
+          <Route path="/details/:name" element={<Details />} />
           <Route path="/Movies" element={<Movies />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Router>
     </React.StrictMode>
-  </Provider>
+  </Provider>,
 );

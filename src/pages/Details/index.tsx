@@ -34,7 +34,7 @@ const Details = () => {
     compositor: "",
   });
   const { currentId, type } = useSelector(
-    (state: RootState) => state.IdReducer
+    (state: RootState) => state.IdReducer,
   );
 
   useEffect(() => {
@@ -68,7 +68,7 @@ const Details = () => {
       setMovieCrew(response.data.cast);
       const crew = response.data.crew;
       const trilhaSonora = crew.find(
-        (p: any) => p.job === "Original Music Composer"
+        (p: any) => p.job === "Original Music Composer",
       );
       const Director = crew.find((p: any) => p.job === "Director");
       setDiretorETrilha((prev) => ({
@@ -88,7 +88,7 @@ const Details = () => {
       setMovieCrew(response.data.cast);
       const crew = response.data.crew;
       const trilhaSonora = crew.find(
-        (p: any) => p.job === "Original Music Composer"
+        (p: any) => p.job === "Original Music Composer",
       );
       const Director = crew.find((p: any) => p.department === "Production");
       setDiretorETrilha((prev) => ({
@@ -118,8 +118,8 @@ const Details = () => {
           variant="track-disc"
           color="#198de0"
           size="medium"
-          text="loading"
           textColor=""
+          text=""
         />
       </CardLoading>
     );
@@ -132,6 +132,7 @@ const Details = () => {
           <ArrowLeft onClick={() => navigate(-1)} aria-label="back page" />
           <div className="Container">
             <ImgMedia
+              loading="eager"
               src={`https://image.tmdb.org/t/p/w500/${movieDetails?.poster_path}
                 
             `}
@@ -175,7 +176,7 @@ const Details = () => {
                   <Tag>
                     <span>Lançamento: </span>
                     {new Date(movieDetails.release_date).toLocaleDateString(
-                      "pt-BR"
+                      "pt-BR",
                     )}
                   </Tag>
                 )}
@@ -204,8 +205,8 @@ const Details = () => {
               type === "Anime"
                 ? "Detalhes do Anime"
                 : type === "Movie"
-                ? "Elenco"
-                : "Temporadas"
+                  ? "Elenco"
+                  : "Temporadas"
             }
           />
         </div>
@@ -218,6 +219,7 @@ const Details = () => {
               .map((person: any) => (
                 <div className="actorContainer" key={person.id}>
                   <ImgActor
+                    loading="lazy"
                     src={`https://image.tmdb.org/t/p/w185${person.profile_path}`}
                     alt={person.name}
                     onError={(e) => {
@@ -233,6 +235,7 @@ const Details = () => {
             movieDetails.seasons.map((season) => (
               <div key={season.id}>
                 <ImgPath
+                  loading="lazy"
                   src={`https://image.tmdb.org/t/p/w154${season.poster_path}`}
                   alt={season.name}
                   onError={(e) => {
