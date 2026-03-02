@@ -13,6 +13,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
     "axios": "^1.6.8",
+    "blurhash": "^2.0.5",
     "bootstrap": "^5.3.3",
     "country-flag-icons": "^1.5.19",
     "framer-motion": "^12.16.0",
