@@ -13,7 +13,7 @@ const Card = ({ data, onClick }: CardProps) => {
 
   return (
     <ContainerMovies data-testid="card-component">
-      {data.map((item: MediaDTO) => {
+      {data?.map((item: MediaDTO) => {
         const imageUrl = `https://image.tmdb.org/t/p/w500/${item.poster_path}`;
         const isLoaded = loadedImages[item.id];
 
