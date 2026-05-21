@@ -20,8 +20,10 @@ function App() {
 
   const fetchMoviesrated = async () => {
     try {
-      const response = await api.get(`/movie/now_playing?language=pt-BR`);
+      const response = await api.get(`/movie/now_playing`);
+
       const top4 = response.data.results.slice(0, 4);
+
       startTransition(() => {
         setMoviesRated(top4);
       });
