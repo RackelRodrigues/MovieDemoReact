@@ -22,7 +22,7 @@ function App() {
     try {
       const response = await api.get(`/movie/now_playing`);
 
-      const top4 = response.data.results.slice(0, 4);
+      const top4 = response.data.results?.slice(0, 4);
 
       startTransition(() => {
         setMoviesRated(top4);
