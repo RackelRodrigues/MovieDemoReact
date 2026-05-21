@@ -10,6 +10,8 @@ import { lazy } from "react";
 import { Suspense } from "react";
 import { OrbitProgress } from "react-loading-indicators";
 
+/// <reference types="vite/client" />
+
 const ReleasesPage = lazy(() => import("./pages/Releases/index.tsx"));
 const SeriesPage = lazy(() => import("./pages/Series/index.tsx"));
 const AnimePage = lazy(() => import("./pages/animes/index.tsx"));

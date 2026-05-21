@@ -1,9 +1,20 @@
 import axios from "axios";
 
+interface ImportMetaEnv {
+  readonly VITE_TMDB_BASE_URL: string;
+  readonly VITE_TMDB_API_KEY: string;
+}
+
+declare global {
+  interface ImportMeta {
+    readonly env: ImportMetaEnv;
+  }
+}
+
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_TMDB_BASE_URL,
+  baseURL: import.meta.env.VITE_TMDB_BASE_URL,
   params: {
-    api_key: process.env.NEXT_PUBLIC_TMDB_API_KEY,
+    api_key: import.meta.env.VITE_TMDB_API_KEY,
     language: "pt-BR",
   },
 });
