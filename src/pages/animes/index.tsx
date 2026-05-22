@@ -26,11 +26,17 @@ const Anime = () => {
   const [isPending, startTransition] = useTransition();
   const fetchAnimes = async () => {
     try {
-      const response = await api.get(`/discover/tv?with_keywords=210024`);
-      startTransition(() => {
-        setAnimes(response.data.results);
+      const response = await api.get("/discover/tv", {
+        params: {
+          with_keywords: 210024,
+          with_original_language: "ja",
+        },
       });
 
+      startTransition(() => {
+        setAnimes(response.data.results);
+        setCountAnimes(response.data.total_results);
+      });
       const count = response.data.results.length;
       setCountAnimes(count);
     } catch (error) {
@@ -45,12 +51,17 @@ const Anime = () => {
 
   const fetchGenders = async () => {
     try {
-      const response = await api.get(`/genre/tv/list?language=ja`);
+      const response = await api.get("/genre/tv/list", {
+        params: {
+          language: "pt-BR",
+        },
+      });
+
       startTransition(() => {
         setGenres(response.data.genres);
       });
     } catch (error) {
-      console.error("Erro ao buscar filmes:", error);
+      console.error("Erro ao buscar gêneros:", error);
     }
   };
 

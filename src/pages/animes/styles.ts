@@ -49,6 +49,16 @@ export const Background = styled.div`
     max-width: 103rem;
     margin: 0 auto;
   }
+
+  @media (min-width: 1080px) {
+    .ContainerSearch {
+      margin: 0;
+      max-width: none;
+    }
+    .ContainerTitle {
+      margin: 0;
+    }
+  }
 `;
 
 export const CardLoading = styled.div`

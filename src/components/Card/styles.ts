@@ -21,6 +21,12 @@ export const Containername = styled.div`
     aspect-ratio: 2 / 2.8;
     overflow: hidden;
   }
+
+  @media (min-width: 1080px) {
+    .image-wrapper {
+      aspect-ratio: initial;
+    }
+  }
 `;
 
 export const ImgMovie = styled.img`
@@ -74,8 +80,14 @@ export const ContainerMovies = styled.div`
   justify-content: center;
   grid-template-columns: repeat(5, 1fr);
   box-sizing: border-box;
+  align-items: center;
+
   width: 100%;
   gap: 3rem;
+
+  @media (min-width: 1194px) {
+    gap: 2rem;
+  }
 
   @media (min-width: 834px) and (max-width: 1194px) {
     grid-template-columns: repeat(4, 1fr);

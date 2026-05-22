@@ -12,6 +12,12 @@ export const Background = styled.div`
     margin: 0 auto;
     padding: 1rem 0;
   }
+
+  @media (min-width: 1080px) {
+    .ContainerTitle {
+      margin: 0;
+    }
+  }
 `;
 
 export const CardLoading = styled.div`

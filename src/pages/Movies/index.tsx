@@ -156,7 +156,14 @@ const Movies = () => {
           />
         </div>
         <div className="ContainerTitle">
-          <TitlePage size="regular" text={`Todos os filmes (${countMovies})`} />
+          <TitlePage
+            size="regular"
+            text={
+              countMovies > 0
+                ? `Todos os filmes (${countMovies})`
+                : "Nenhum filme encontrado"
+            }
+          />
         </div>
         {isPending ? (
           <CardLoading>
