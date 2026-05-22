@@ -85,10 +85,6 @@ export const ContainerMovies = styled.div`
   width: 100%;
   gap: 3rem;
 
-  @media (min-width: 1194px) {
-    gap: 2rem;
-  }
-
   @media (min-width: 834px) and (max-width: 1194px) {
     grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
