@@ -41,11 +41,7 @@ function App() {
 
   const fetchMovies = async () => {
     try {
-      console.log(import.meta.env.VITE_TMDB_API_KEY);
-      console.log(import.meta.env.VITE_TMDB_BASE_URL);
       const response = await api.get(`/discover/movie`);
-      console.log("api", api);
-      console.log("API:", response.data);
 
       startTransition(() => {
         setFeaturedMedia(response.data.results);
